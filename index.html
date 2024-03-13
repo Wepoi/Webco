@@ -1,114 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image Background Remover</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    #container {
-        background-color: #ffffff;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-        color: #333333;
-    }
-    input[type="file"] {
-        display: none;
-    }
-    .custom-file-upload {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: #ffffff;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
-    .custom-file-upload:hover {
-        background-color: #45a049;
-    }
-    button {
-        padding: 10px 20px;
-        background-color: #008CBA;
-        color: #ffffff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    button:hover {
-        background-color: #005f75;
-    }
-    #image-preview {
-        max-width: 400px;
-        margin: 20px auto;
-        display: block;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webco</title>
+    <meta name="description" content="Webco pays us to create stunning websites for their clients. Get started today!">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+            border-radius: 50%;
+            background-color: white;
+            margin-top: 50px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3em;
+            color: black;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        .soon {
+            font-size: 1.5em;
+            font-style: italic;
+            margin-top: 50px;
+        }
+        .footer {
+            background-color: #333;
+            padding: 20px;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: #555;
+            transition: background-color 0.3s ease;
+        }
+        .footer a:hover {
+            background-color: #777;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: auto;
+            z-index: 2;
+        }
+    </style>
 </head>
 <body>
-<div id="container">
-    <h1>Image Background Remover</h1>
-    <label for="image-input" class="custom-file-upload">Choose Image</label>
-    <input type="file" id="image-input">
-    <br>
-    <button onclick="removeBackground()">Remove Background</button>
-    <br>
-    <img id="image-preview" src="#" alt="Preview">
-    <canvas id="output-canvas" style="display: none;"></canvas>
-</div>
-
-<script>
-    function removeBackground() {
-        var input = document.getElementById('image-input');
-        var outputCanvas = document.getElementById('output-canvas');
-        var ctx = outputCanvas.getContext('2d');
-        
-        var file = input.files[0];
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-            var img = new Image();
-            img.onload = function() {
-                outputCanvas.width = img.width;
-                outputCanvas.height = img.height;
-                ctx.drawImage(img, 0, 0);
-                var imageData = ctx.getImageData(0, 0, outputCanvas.width, outputCanvas.height);
-                for (var i = 0; i < imageData.data.length; i += 4) {
-                    var avg = (imageData.data[i] + imageData.data[i + 1] + imageData.data[i + 2]) / 3;
-                    imageData.data[i] = avg;
-                    imageData.data[i + 1] = avg;
-                    imageData.data[i + 2] = avg;
-                }
-                ctx.putImageData(imageData, 0, 0);
-            }
-            img.src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-    }
-
-    document.getElementById('image-input').addEventListener('change', function() {
-        var file = this.files[0];
-        var img = document.getElementById('image-preview');
-        img.onload = function() {
-            URL.revokeObjectURL(img.src);
-        }
-        img.src = URL.createObjectURL(file);
-    });
-</script>
+    <img src="nightwire_logo.png" alt="NightWire Logo" class="logo">
+    <div class="container">
+        <h1><span style="color: black;">WEB</span><span style="color: red;">CO</span></h1>
+        <p class="soon">Coming Soon</p>
+    </div>
+    <div class="footer">
+        <p><a href="https://nightwirestudios.com" target="_blank">NightWire Studios</a></p>
+    </div>
 </body>
 </html>
